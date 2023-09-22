@@ -5,7 +5,7 @@
           </div>
         <div class="flex justify-content-center" >
           <div class="grid px-2 md:px-0" >
-            <div class="col-12 lg:col-6 xl:col-4 flex justify-content-evenly" v-for="car in 3" :key="car">
+            <div class="col-12 lg:col-6 xl:col-4 flex justify-content-evenly" v-for="card in 3" :key="card">
               <Card class="transition-duration-500 shadow-6 hover:shadow-8" v-motion-slide-visible-top :delay="200" :hovered="{ y: -10 }" >
                 <template #header>
                   <img src="demo/images/product/properties.jpeg" alt="Image"
