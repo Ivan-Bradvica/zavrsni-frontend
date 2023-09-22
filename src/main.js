@@ -1,5 +1,23 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
 
-createApp(App).use(router).mount('#app')
+import router from './router'
+import PrimeVue from 'primevue/config';
+
+
+import 'primevue/resources/themes/saga-blue/theme.css'; // Promijenite temu prema svojim potrebama
+import 'primevue/resources/primevue.min.css';
+import 'primeicons/primeicons.css';
+import './index.css'
+import "primeflex/primeflex.css";
+
+ 
+ 
+
+
+const app=createApp(App);
+app.use(router);
+app.use(PrimeVue);
+ 
+ 
+app.mount('#app');
