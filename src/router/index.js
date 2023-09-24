@@ -44,12 +44,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AllProperties.vue')
   },
   {
-    path: '/all-properties',
+    path: '/list-properties',
     name: 'list',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/ListProperty.vue')
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue')
   },
 
 ]

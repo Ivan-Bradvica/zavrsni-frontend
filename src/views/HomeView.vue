@@ -31,8 +31,8 @@
     <div class="py-4 px-4 mx-0 mt-8 lg:mx-8 ">
                 <div class="grid justify-content-between">
                     <div class="col-12 md:col-2" style="margin-top: -1.5rem">
-                        <a @click="smoothScroll('#home')" class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
-                            <img src="demo/images/product/8207.jpg" alt="footer sections" width="350" height="350" class="mr-2" />
+                        <a href="/" class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
+                            <img src="demo/images/product/8207.jpg" alt="footer sections" width="350" height="350" class="mr-2"  />
                             
                         </a>
                     </div>
@@ -58,7 +58,7 @@
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
                                 <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/landing/new-badge.svg" class="ml-2" /></a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/product/coming.jpeg" class="ml-2" width="45px" /></a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
                                 <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
                             </div>
@@ -83,6 +83,8 @@ import Button from 'primevue/button';
 import Image from 'primevue/image';
 
 import LatestCards from './LatestCards.vue';
+ 
+
 
 
 </script>
