@@ -1,6 +1,7 @@
-<script setup></script>
+
 
 <template>
+  <NavBar></NavBar>
   <div class="flex align-items-center justify-content-center md:mb-0 mb-3">
     <div
       class="
@@ -218,4 +219,6 @@
 </style>
 <script setup>
 import Divider from 'primevue/divider'
+import NavBar from '../components/NavBar.vue'
+
 </script>

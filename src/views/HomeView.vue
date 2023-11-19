@@ -1,4 +1,6 @@
 <template>
+    <NavBar></NavBar>
+
     <!--Za Pocetni izgled-->
     <div class="home">
 
@@ -10,8 +12,13 @@
                     <p class="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-                        <a href="/buy-properties"><Button label="All Properties" raised class="button  " id="button1"  /></a>
-                        <!--<a href="/all-properties"><Button label="List your property" class="button " id="button2" raised /></a>-->
+                    <router-link to="/buy-properties" v-slot="{ navigate }" >
+                        <a @click="navigate()" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3" >
+                            <span  id="button1">All Properties</span>
+                        </a>
+                    </router-link>
+
+                    <!--<a href="/all-properties"><Button label="List your property" class="button " id="button2" raised /></a>-->
                 </section>
             </div>
             <div class="col-12 md:col-6 overflow-hidden">
@@ -24,67 +31,64 @@
     </div>
     <!--Kartice-->
     <div>
-        <LatestCards/>
+        <LatestCards />
     </div>
 
     <!--Footer-->
     <div class="py-4 px-4 mx-0 mt-8 lg:mx-8 ">
-                <div class="grid justify-content-between">
-                    <div class="col-12 md:col-2" style="margin-top: -1.5rem">
-                        <a href="/" class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
-                            <img src="demo/images/product/8207.jpg" alt="footer sections" width="350" height="350" class="mr-2"  />
-                            
-                        </a>
+        <div class="grid justify-content-between">
+            <div class="col-12 md:col-2" style="margin-top: -1.5rem">
+                <a href="/"
+                    class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
+                    <img src="demo/images/product/8207.jpg" alt="footer sections" width="350" height="350" class="mr-2" />
+
+                </a>
+            </div>
+
+            <div class="col-12 md:col-10 lg:col-7">
+                <div class="grid text-center md:text-left">
+                    <div class="col-12 md:col-3">
+                        <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
+                        <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
                     </div>
 
-                    <div class="col-12 md:col-10 lg:col-7">
-                        <div class="grid text-center md:text-left">
-                            <div class="col-12 md:col-3">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
-                            </div>
+                    <div class="col-12 md:col-3 mt-4 md:mt-0">
+                        <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
+                        <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
+                    </div>
 
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
-                            </div>
+                    <div class="col-12 md:col-3 mt-4 md:mt-0">
+                        <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img
+                                src="/demo/images/product/coming.jpeg" class="ml-2" width="45px" /></a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
+                        <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+                    </div>
 
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/product/coming.jpeg" class="ml-2" width="45px" /></a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
-                            </div>
-
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
-                            </div>
-                        </div>
+                    <div class="col-12 md:col-3 mt-4 md:mt-0">
+                        <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
+                        <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
+                        <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
                     </div>
                 </div>
             </div>
-        
-
-    
+        </div>
+    </div>
 </template>
 
 <script setup>
-import Button from 'primevue/button';
 import Image from 'primevue/image';
 
 import LatestCards from './LatestCards.vue';
- 
-
+import NavBar from '../components/NavBar.vue'
 
 
 </script>
@@ -97,7 +101,7 @@ import LatestCards from './LatestCards.vue';
 }
 
 #button1 {
-    margin-right: 10px;
+    margin-left: 2px;
     color: #ffffff;
     background-color: #4E5FBB;
     padding: 0.5rem 1rem;

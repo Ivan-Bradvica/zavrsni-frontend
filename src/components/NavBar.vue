@@ -1,83 +1,149 @@
 <template>
-  <nav class="bg-white dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600" id="nav">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="/" class="flex items-center">
-        <img src="demo/images/product/8207.jpg" alt="Image" style="width: 100px; height: 100px; object-fit:cover" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Real Estate</span>
+  <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3">
+      <a class="flex align-items-center" href="/"> <img src="/demo/images/product/8207.jpg" alt="AppLogo" height="150" width="150" class="mr-2" /><span class="text-900 font-medium text-2xl line-height-3 mr-8">RealEstate</span> </a>
+      <a class="cursor-pointer block lg:hidden text-700"  v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
+          <i class="pi pi-bars text-4xl"></i>
       </a>
-      <div class="flex md:order-2">
-        <button type="button" id="login"><a href="/login">Login</a> </button>
-        <button type="button" id="register"><a href="/register" >Register</a></button>
+      <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top: 100px">
+          <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+              
+             
+              <li>
+                  <router-link to="/about" v-slot="{ navigate }">
+                      <a @click="navigate()" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                          <span>O Projektu</span>
+                      </a>
+                  </router-link>
+              </li>
+          </ul>
 
-        <button data-collapse-toggle="navbar-sticky" type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-sticky" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15" />
-          </svg>
-        </button>
-      </div>
-      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-        <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-           
-           
-         
-          <li>
-            <a href="/about"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">O
-              projektu</a>
-          </li>
+          <!-- Ako korisnik nije logiran -->
+          <div v-if="isLogged === false">
+              <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+                  <router-link to="/login" v-slot="{ navigate }">
+                      <Button role="link" label="Login" class="p-button-text p-button-rounded border-none font-light line-height-2 text-primary" @click="navigate()"></Button>
+                  </router-link>
+                  <router-link to="/register" v-slot="{ navigate }">
+                      <Button role="link" label="Register" class="p-button-text bg-primary p-button-rounded border-none font-light line-height-2 text-white" @click="navigate()"></Button>
+                  </router-link>
+              </div>
+          </div>
 
-        </ul>
+          <!-- Nakon sto se logira -->
+          <div v-if="isLogged === true">
+              <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+                  <Menu ref="menu" :model="overlayMenuItems" :popup="true" class="mt-2" />
+                  <a class="flex align-items-center cursor-pointer text-600" @click="toggle">
+                      <img src="/demo/images/product/avatar.jpg" width="40" height="40" alt="">
+                      <span class="font-medium text-900 text-lg mx-2">{{this.userInfo.first_name}} {{ this.userInfo.last_name }}</span>
+                      <i class="pi pi-angle-down pt-1"></i>
+                  </a>
+              </div>
+          </div>
+          <Toast position="top-right"/>
       </div>
-    </div>
-  </nav>
+  </div>
 </template>
-<style>
-#login {
-  color: #000;
-  background-color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  border: 1px solid #000;
- 
-  margin-right: 1rem;
-  
-}
 
-#login:hover {
-  background-color: #d4f2e8;
-}
+<script>
+import axios from "axios";
+import { ref } from 'vue'
+export default {
+data () {
+  return {
+    isLogged: this.checkIfIsLogged(),
+    menu: null,
+    overlayMenuItems: ref([
+         
+          {
+              label: 'Dashboard',
+              icon: "pi pi-id-card",
+              visible: () => this.userInfo.is_admin,
+              to: '/dashboard'
+          },
+          {
+              label: 'All Orders',
+              icon: "pi pi-id-card",
+              visible: () => this.userInfo.is_admin,
+              to: '/admin-orders'
+          },
+          {
+              label: 'Orders',
+              icon: "pi pi-wallet",
+              to: '/orders'
+          },
+          {
+            separator: true
+          },
+          {
+              label: "Logout",
+              icon: "pi pi-sign-out",
+              command:() => {
+                  this.logout()
+              }
+          }
+      ]),
+      userInfo: []
+  }
+},
 
-#login:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.3);
-}
-#register{
-  color: #ffffff;
-    background-color: #4E5FBB;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    font-size: 1rem;
-    text-align: center;
-    cursor: pointer;
+methods: {
+  toggleSuccessToast() {
+    this.$toast.add({
+      severity: "success",
+      summary: "Success Message",
+      detail: "Logged out successfully!",
+      life: 4000,
+    });
+  },
 
-}
-#register:hover {
-    background-color: rgb(75, 66, 196);
-    /* Dodajte stil za hover prema vašim preferencijama */
-}
-#nav{
-  height: 150px;
-}
-</style>
+  toggle(event) {
+          this.$refs.menu.toggle(event);
+      },
 
-<script setup>
- </script>
+  logout() {
+    axios
+      .get(
+        "/auth/logout",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        localStorage.removeItem('token')
+        this.isLogged = this.checkIfIsLogged()
+        this.toggleSuccessToast("Logged out successfully!");
+        this.$router.push("/");
+      })
+      .catch((error) => {
+          console.log(error)
+      });
+  },
+  checkIfIsLogged () {
+    let token = window.localStorage.getItem('token')
+    if (token) {
+      this.getUserInfo()
+      return true
+    } else {
+      return false
+    }
+  },
+  getUserInfo(){
+      axios
+      .get(
+        "/auth/user")
+      .then((response) => {
+        this.userInfo = response.data
+      })
+      .catch((error) => {
+          console.log(error)
+      });
+  },
+},
+}
+</script>
+
+<style lang="scss" scoped></style>

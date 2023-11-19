@@ -44,12 +44,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AllProperties.vue')
   },
   {
-    path: '/list-properties',
-    name: 'list',
+    path: '/admin-orders',
+    name: 'admin-orders',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ListProperty.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminOrders.vue')
   },
   {
     path: '/dashboard',
@@ -59,6 +59,31 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue')
   },
+  {
+    path: '/orders',
+    name: 'orders',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/OrdersView.vue')
+  },
+  {
+    path: '/test',
+    name: 'test',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
+  },
+  {
+    path: '/admin-orders',
+    name: 'admin-orders',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminOrders.vue')
+  },
+
 
 ]
 
